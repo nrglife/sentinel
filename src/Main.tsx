@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import Button from "@mui/material/Button";
 import PolygonImage from "assets/images/polygon2.png";
 import ImageCard from "ImageCard";
-import Stack from "@mui/material/Stack";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Modal from "@mui/material/Modal";
@@ -53,14 +52,11 @@ const Main = () => {
   const getSearchData = async () => {
     setLoading(true);
     var url = create_serach_url(limit, offset);
-    //console.log("url", url);
     const response = await api.get(url);
-    //console.log(response);
     const products = response.data.products;
     const new_data = products.map((product: any, idx: number) => {
       const id = product.id;
       const uuid = product.uuid;
-      console.log(product);
 
       return {
         url: create_url(uuid),
@@ -68,7 +64,7 @@ const Main = () => {
         name: `image_${offset + idx + 1}`,
       };
     });
-    //console.log(new_data);
+
     setData(new_data);
     setOffset(offset + limit);
     setLoading(false);
@@ -78,23 +74,23 @@ const Main = () => {
     <main>
       <Box>
         <Box sx={{ display: "flex", justifyContent: "space-evenly", paddingTop: "40px" }}>
-          <p style={{ maxWidth: "30%", display: "flex", gap: "15px", alignItems: "center" }}>
+          <div style={{ maxWidth: "30%", display: "flex", gap: "15px", alignItems: "center" }}>
             <img src={PolygonImage} alt="polygon" style={{ maxHeight: "100px" }} onClick={handleAreaOpen} />
             <span>
               <strong>initial polygon (Israel):</strong> {polygon}
             </span>
-          </p>
+          </div>
 
-          <p>
+          <div>
             <TextField id="limit" label="number of images" value={limit} onChange={handleLimit} />
-          </p>
-          <p>
+          </div>
+          <div>
             <strong>cloud cover percentage:</strong> {cloudness}
-          </p>
+          </div>
         </Box>
         <Box sx={{ textAlign: "center", mb: 3 }}>
           <Button variant="contained" color="primary" onClick={handleRefresh}>
-            Refresh
+            Replace
           </Button>
         </Box>
         <hr />

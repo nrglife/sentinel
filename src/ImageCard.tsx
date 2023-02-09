@@ -30,9 +30,9 @@ const ImageCard = (props: Props) => {
 
   const getImage = async () => {
     setLoading(true);
-    const response = (await api.get(item.url, {
+    const response = await api.get(item.url, {
       responseType: "blob",
-    })) as any;
+    });
     const objectUrl = URL.createObjectURL(response.data);
     setImage(objectUrl);
     setLoading(false);

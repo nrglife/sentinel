@@ -3,7 +3,7 @@ import { setupInterceptors } from "./api.service";
 
 const InjectAxiosInterceptors: FC = () => {
   useEffect(() => {
-    console.log("this effect is called once");
+    console.log("this effect should be called once");
     setupInterceptors();
   }, []);
   return null;
