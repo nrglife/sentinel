@@ -1,10 +1,15 @@
 import axios, { AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from "axios";
 
 export const setupInterceptors = (): void => {
+  const username = process.env.REACT_APP_AUTH_USERNAME;
+  const password = process.env.REACT_APP_AUTH_PASSWORD;
+
+  const token = btoa(`${username}:${password}`);
+
   axios.defaults.withCredentials = true;
   axios.interceptors.request.use(
     (config: InternalAxiosRequestConfig<any>) => {
-      config.headers.Authorization = process.env.REACT_APP_AUTH_CREDENTIALS;
+      config.headers.Authorization = `Basic ${token}`;
       return config;
     },
     (error) => {
