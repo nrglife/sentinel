@@ -4,7 +4,7 @@ export const setupInterceptors = (): void => {
   axios.defaults.withCredentials = true;
   axios.interceptors.request.use(
     (config: InternalAxiosRequestConfig<any>) => {
-      config.headers.Authorization = "Basic YWxldmluem9uOkFsZG8xOTgw";
+      config.headers.Authorization = process.env.REACT_APP_AUTH_CREDENTIALS;
       return config;
     },
     (error) => {
